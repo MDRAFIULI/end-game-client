@@ -5,10 +5,10 @@ const ToDo = () => {
     const [tasks, setTasks] = useState([]);
     const [text, setText] = useState('');
     useEffect(() => {
-        fetch('tasks.json')
+        fetch('http://localhost:5000/tasks')
             .then(res => res.json())
             .then(data => setTasks(data))
-    }, []);
+    }, [tasks]);
 
     const handleTaskBlur = (e) => {
         setText(e.target.value)
@@ -39,7 +39,7 @@ const ToDo = () => {
                 </form>
             </div>
             <div className='mx-auto mt-16'>
-                {tasks.map(task => <Task task={task}></Task>)}
+                {tasks.map(task => <Task task={task} setTasks={setTasks} tasks={tasks}></Task>)}
             </div>
         </div>
     );
